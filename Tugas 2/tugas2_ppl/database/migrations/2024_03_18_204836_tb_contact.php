@@ -14,7 +14,8 @@ class TbContact extends Migration
     public function up()
     {
         Schema::create('tb_contact', function (Blueprint $table) {
-            $table->id('id_contact');
+            $table->id();
+            $table->foreignId('users_id');
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2024 at 04:55 AM
+-- Generation Time: Mar 26, 2024 at 03:19 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,11 +38,11 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(67, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(68, '2024_03_18_204735_tb_user', 1),
-(69, '2024_03_18_204836_tb_contact', 1),
-(70, '2024_03_18_204846_tb_address', 1),
-(71, '2024_03_18_205334_create_sessions_table', 1);
+(1, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(2, '2024_03_18_204735_tb_user', 1),
+(3, '2024_03_18_204836_tb_contact', 1),
+(4, '2024_03_18_204846_tb_address', 1),
+(5, '2024_03_18_205334_create_sessions_table', 1);
 
 -- --------------------------------------------------------
 
@@ -84,7 +84,8 @@ CREATE TABLE `sessions` (
 --
 
 CREATE TABLE `tb_address` (
-  `id_address` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tb_contact_id` bigint(20) UNSIGNED NOT NULL,
   `street` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
   `province` varchar(255) NOT NULL,
@@ -98,8 +99,9 @@ CREATE TABLE `tb_address` (
 -- Dumping data for table `tb_address`
 --
 
-INSERT INTO `tb_address` (`id_address`, `street`, `city`, `province`, `country`, `postal_code`, `created_at`, `updated_at`) VALUES
-(6, 'Jln Liprak Wetan', 'Probolinggo', 'Jawa Timur', 'Indonesia', 66772, '2024-03-18 20:47:19', '2024-03-18 20:47:19');
+INSERT INTO `tb_address` (`id`, `tb_contact_id`, `street`, `city`, `province`, `country`, `postal_code`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Liprak Wetan', 'Probolinggo', 'Jawa Timur', 'Indonesia', 67672, '2024-03-26 07:00:15', '2024-03-26 07:05:27'),
+(2, 2, 'Jln. Imam Bonjol', 'Denpasar Barat', 'Bali', 'Indonesia', 65653, '2024-03-26 07:01:21', '2024-03-26 07:01:21');
 
 -- --------------------------------------------------------
 
@@ -108,7 +110,8 @@ INSERT INTO `tb_address` (`id_address`, `street`, `city`, `province`, `country`,
 --
 
 CREATE TABLE `tb_contact` (
-  `id_contact` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `users_id` bigint(20) UNSIGNED NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -121,8 +124,9 @@ CREATE TABLE `tb_contact` (
 -- Dumping data for table `tb_contact`
 --
 
-INSERT INTO `tb_contact` (`id_contact`, `firstname`, `lastname`, `email`, `phone`, `created_at`, `updated_at`) VALUES
-(10, 'Maulana', 'Arridho', 'example@gmail.com', '0893819', '2024-03-18 20:46:29', '2024-03-18 20:46:29');
+INSERT INTO `tb_contact` (`id`, `users_id`, `firstname`, `lastname`, `email`, `phone`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Maulana', 'Arridho', 'maula@gmail.com', '088', '2024-03-26 06:59:53', '2024-03-26 06:59:53'),
+(2, 1, 'Irfan', 'Aditya', 'irfan@gmail.com', '089', '2024-03-26 07:00:51', '2024-03-26 07:00:51');
 
 -- --------------------------------------------------------
 
@@ -144,7 +148,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `name`, `created_at`, `updated_at`) VALUES
-(2, 'tes', '$2y$10$.zDZsDoP9pC1//iGOYVyEumeFcsGF28dmFcBdsMU.aiRnNlv419EG', 'Testing', '2024-03-18 16:43:59', '2024-03-18 16:43:59');
+(1, 'maulana', '$2y$10$c1YAwKScz43p3gRu2floYuezi.1axKDuoZrF3f0PtuRC04Vlcm6AG', 'Maulana', '2024-03-26 06:59:33', '2024-03-26 06:59:33');
 
 --
 -- Indexes for dumped tables
@@ -176,13 +180,13 @@ ALTER TABLE `sessions`
 -- Indexes for table `tb_address`
 --
 ALTER TABLE `tb_address`
-  ADD PRIMARY KEY (`id_address`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tb_contact`
 --
 ALTER TABLE `tb_contact`
-  ADD PRIMARY KEY (`id_contact`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -198,7 +202,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -210,19 +214,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `tb_address`
 --
 ALTER TABLE `tb_address`
-  MODIFY `id_address` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_contact`
 --
 ALTER TABLE `tb_contact`
-  MODIFY `id_contact` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

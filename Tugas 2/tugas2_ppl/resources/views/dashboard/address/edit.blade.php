@@ -6,9 +6,19 @@
 </div>
 
 <div class="col-md-6">
-    <form action="/dashboard/address/{{ $address->id_address }}" method="post">
+    <form action="/dashboard/address/{{ $address->id }}" method="post">
         @method('put')
         @csrf
+        {{-- <input type="text" name="tb_contact_id" value="{{ old('firstname', $address->tb_contact_id) }}" readonly> --}}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Pilih User</label>
+            <select class="form-control" name="tb_contact_id" id="">
+                <option value="">-- Pilih User --</option>
+                @foreach($contacts as $contact)
+                <option value="{{ $contact->id }}" <?php if($address->id == $contact->id){ echo 'selected'; } ?>>{{ $contact->firstname }}</option>
+                @endforeach
+            </select>
+        </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Street</label>
             <input type="text" name="street" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required value="{{ old('street', $address->street) }}">

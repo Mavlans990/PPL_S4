@@ -22,6 +22,7 @@
         <thead>
             <tr>
                 <th scope="col">No</th>
+                <th scope="col">Username</th>
                 <th scope="col">Firstname</th>
                 <th scope="col">Lastname</th>
                 <th scope="col">Email</th>
@@ -33,14 +34,15 @@
             @foreach ($contacts as $contact)    
             <tr>
                 <td>{{ $loop->iteration }}</td>
+                <td>{{ $contact->user_relasi->username }}</td>
                 <td>{{ $contact->firstname }}</td>
                 <td>{{ $contact->lastname }}</td>
                 <td>{{ $contact->email }}</td>
                 <td>{{ $contact->phone }}</td>
                 <td>
                     {{-- <a href="/dashboard/contact/{{ $contact->id_contact }}" class="btn btn-info btn-sm"><i class="bi bi-eye"></i></a> --}}
-                    <a href="/dashboard/contact/{{ $contact->id_contact }}/edit" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i></a>
-                    <form action="/dashboard/contact/{{ $contact->id_contact }}" method="post" class="d-inline">
+                    <a href="/dashboard/contact/{{ $contact->id }}/edit" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i></a>
+                    <form action="/dashboard/contact/{{ $contact->id }}" method="post" class="d-inline">
                         @method('delete')
                         @csrf
                         <button class="btn btn-danger btn-sm" onclick="return confirm('Apakah yakin menghapus data ini?')"><i class="bi bi-trash"></i></button>

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Users extends Model
 {
@@ -12,4 +12,8 @@ class Users extends Model
     protected $table = 'users';
     protected $primaryKey = 'id';
     protected $fillable = ['username', 'password', 'name'];
+
+    public function contact(){
+        return $this->hasMany(Contact::class);
+    }
 }

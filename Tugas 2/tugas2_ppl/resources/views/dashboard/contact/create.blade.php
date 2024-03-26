@@ -8,6 +8,16 @@
 <div class="col-md-6">
     <form action="/dashboard/contact" method="post">
         @csrf
+        {{-- <input type="hidden" name="users_id" value="1"> --}}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Pilih User</label>
+            <select class="form-control" name="users_id" id="">
+                <option value="">-- Pilih User --</option>
+                @foreach($users as $user)
+                <option value="{{ $user->id }}">{{ $user->username }}</option>
+                @endforeach
+            </select>
+        </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Firstname</label>
             <input type="text" name="firstname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required value="{{ old('firstname') }}">

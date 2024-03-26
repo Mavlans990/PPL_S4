@@ -22,6 +22,7 @@
         <thead>
             <tr>
                 <th scope="col">No</th>
+                <th scope="col">Firstname</th>
                 <th scope="col">Street</th>
                 <th scope="col">City</th>
                 <th scope="col">Province</th>
@@ -34,6 +35,7 @@
             @foreach ($addresss as $address)    
             <tr>
                 <td>{{ $loop->iteration }}</td>
+                <td>{{ $address->contact_relasi->firstname }}</td>
                 <td>{{ $address->street }}</td>
                 <td>{{ $address->city }}</td>
                 <td>{{ $address->province }}</td>
@@ -41,8 +43,8 @@
                 <td>{{ $address->postal_code }}</td>
                 <td>
                     {{-- <a href="/dashboard/contact/{{ $contact->id_contact }}" class="btn btn-info btn-sm"><i class="bi bi-eye"></i></a> --}}
-                    <a href="/dashboard/address/{{ $address->id_address }}/edit" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i></a>
-                    <form action="/dashboard/address/{{ $address->id_address }}" method="post" class="d-inline">
+                    <a href="/dashboard/address/{{ $address->id }}/edit" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i></a>
+                    <form action="/dashboard/address/{{ $address->id }}" method="post" class="d-inline">
                         @method('delete')
                         @csrf
                         <button class="btn btn-danger btn-sm" onclick="return confirm('Apakah yakin menghapus data ini?')"><i class="bi bi-trash"></i></button>
@@ -54,3 +56,12 @@
     </table>
 </div>
 @endsection
+
+{{-- Address::create([
+    'id_contact' => 2,
+    'street' => 'Banyuanyar',
+    'city' => 'Probolinggo',
+    'province' => 'Select State',
+    'country' => 'Indonesia',
+    'postal_code' => '67275'
+]) --}}

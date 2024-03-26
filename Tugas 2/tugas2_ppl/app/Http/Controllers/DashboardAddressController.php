@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class DashboardAddressController extends Controller
@@ -26,7 +27,9 @@ class DashboardAddressController extends Controller
      */
     public function create()
     {
-        return view('dashboard.address.create');
+        return view('dashboard.address.create', [
+            'contacts' => Contact::all()
+        ]);
     }
 
     /**
@@ -42,7 +45,8 @@ class DashboardAddressController extends Controller
             'city' => 'required',
             'province' => 'required',
             'country' => 'required',
-            'postal_code' => 'required'
+            'postal_code' => 'required',
+            'tb_contact_id' => 'required'
         ]);
 
         Address::create($validate);
@@ -69,7 +73,8 @@ class DashboardAddressController extends Controller
     public function edit(Address $address)
     {
         return view('dashboard.address.edit', [
-            'address' => $address
+            'address' => $address,
+            'contacts' => Contact::all()
         ]);
     }
 
@@ -87,10 +92,11 @@ class DashboardAddressController extends Controller
             'city' => 'required',
             'province' => 'required',
             'country' => 'required',
-            'postal_code' => 'required'
+            'postal_code' => 'required',
+            'tb_contact_id' => 'required'
         ]);
 
-        Address::where('id_address', $address->id_address)->update($validate);
+        Address::where('id', $address->id)->update($validate);
         return redirect('/dashboard/address')->with('success', 'Ubah data berhasil!');
     }
 
@@ -102,7 +108,7 @@ class DashboardAddressController extends Controller
      */
     public function destroy(Address $address)
     {
-        Address::destroy($address->id_address);
+        Address::destroy($address->id);
         return redirect('/dashboard/address')->with('success', 'Data berhasil dihapus!');
     }
 }

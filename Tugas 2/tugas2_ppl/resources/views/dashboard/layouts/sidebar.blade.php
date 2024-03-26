@@ -12,12 +12,12 @@
                         Dashboard
                     </a>
                 </li>
-                {{-- <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link {{ Request::is('dashboard/user*') ? 'active' : '' }} d-flex align-items-center gap-2" href="/dashboard/user">
                         <svg class="bi"><use xlink:href="#file-earmark"/></svg>
                         Master User
                     </a>
-                </li> --}}
+                </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('dashboard/contact*') ? 'active' : '' }} d-flex align-items-center gap-2" href="/dashboard/contact">
                         <svg class="bi"><use xlink:href="#file-earmark"/></svg>

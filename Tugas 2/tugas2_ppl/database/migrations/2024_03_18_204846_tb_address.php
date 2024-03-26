@@ -14,7 +14,8 @@ class TbAddress extends Migration
     public function up()
     {
         Schema::create('tb_address', function (Blueprint $table) {
-            $table->id('id_address');
+            $table->id();
+            $table->foreignId('tb_contact_id');
             $table->string('street');
             $table->string('city');
             $table->string('province');
